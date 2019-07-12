@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "name": "my-react-app",
+  "name": "citation-finder",
+  "alias": "citation-finder",
   "builds": [
     {
       "src": "package.json",
