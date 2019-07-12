@@ -61,7 +61,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container spacing={4} style={{ padding: 16 }}>
+      <Grid container spacing={4} xs={12} style={{ padding: 16 }}>
         <Grid item md={12}>
           <Typography variant={'h2'}>1. Enter citations</Typography>
 
@@ -117,7 +117,7 @@ export const App = () => {
 
         {items && (
           <Grid item md={12}>
-            <Grid container spacing={8}>
+            <Grid container spacing={8} xs={12}>
               <Grid item>
                 <Typography variant={'h2'}>
                   4. Review the matched citations
@@ -139,7 +139,7 @@ export const App = () => {
                 </Typography>
               </Grid>
 
-              <Grid item container spacing={8}>
+              <Grid item container spacing={8} xs={12}>
                 {items.map((item, index) => (
                   <Grid item md={12}>
                     <Item
@@ -163,6 +163,7 @@ export const App = () => {
             <Grid
               container
               spacing={4}
+              xs={12}
               justify={'flex-start'}
               alignItems={'center'}
             >
