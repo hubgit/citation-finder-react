@@ -50,7 +50,7 @@ export const App = () => {
     setComplete(
       items &&
         selectedItems &&
-        selectedItems.filter(Boolean).length === items.length
+        selectedItems.filter(item => item !== undefined).length === items.length
     )
   }, [items, selectedItems])
 

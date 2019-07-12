@@ -64,7 +64,7 @@ export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
 
   useEffect(() => {
     setSelectedItem(undefined)
-    addSelectedItem(index, undefined)
+    addSelectedItem(index, selected === null ? '' : undefined)
 
     if (selected) {
       crossref
@@ -86,7 +86,7 @@ export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
   return (
     <Grid container spacing={4} style={{ background: '#add8e6' }}>
       <Grid item md={12}>
-        <Typography variant={'h3'}>Citation</Typography>
+        <Typography variant={'h3'}>Citation {index + 1}</Typography>
 
         <TextField
           fullWidth
@@ -122,6 +122,19 @@ export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
             <Grid item xs={12} md={6}>
               <Typography variant={'h3'}>Matches</Typography>
 
+              {!selected && (
+                <div style={{ marginTop: 8, marginBottom: 8 }}>
+                  <Typography variant={'body1'}>
+                    No matches selected!
+                  </Typography>
+
+                  <Typography variant={'body1'}>
+                    Either select the correct match, edit the text above and
+                    search again, or leave unselected if none are correct.
+                  </Typography>
+                </div>
+              )}
+
               <List dense>
                 {matches.map(match => {
                   const isSelected = selected && selected === match.DOI
@@ -139,7 +152,7 @@ export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
                         borderColor: isSelected ? 'black' : 'transparent',
                         marginBottom: 8,
                       }}
-                      onClick={() => setSelected(match.DOI)}
+                      onClick={() => setSelected(isSelected ? null : match.DOI)}
                     >
                       <ListItemText
                         primary={match.title ? match.title[0] : ''}
