@@ -30,7 +30,7 @@ export const App = () => {
 
   const splitItems = useCallback(() => {
     crossref.queue.clear() // TODO: cancel running request
-    setItems(text.split(/\n+/).filter(Boolean))
+    setItems(text.split(/\n+/).filter(_ => _.trim()))
   }, [text])
 
   useEffect(() => {
