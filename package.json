@@ -2,6 +2,8 @@
   "name": "citation-finder",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "repository": "github:hubgit/citation-finder-react",
   "dependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/styles": "^4.2.0",
