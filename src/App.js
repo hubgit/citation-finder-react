@@ -61,7 +61,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container spacing={4} xs={12} style={{ padding: 16 }}>
+      <Grid container spacing={4} style={{ padding: 16 }}>
         <Grid item xs={12}>
           <Typography variant={'h2'}>1. Enter citations</Typography>
 
@@ -117,7 +117,7 @@ export const App = () => {
 
         {items && (
           <Grid item xs={12}>
-            <Grid container spacing={8} xs={12}>
+            <Grid container spacing={4}>
               <Grid item xs={12}>
                 <Typography variant={'h2'}>
                   4. Review the matched citations
@@ -139,18 +139,20 @@ export const App = () => {
                 </Typography>
               </Grid>
 
-              <Grid item xs={12} container spacing={4}>
-                {items.map((item, index) => (
-                  <Grid item xs={12}>
-                    <Item
-                      key={index}
-                      text={item}
-                      format={format}
-                      index={index}
-                      addSelectedItem={addSelectedItem}
-                    />
-                  </Grid>
-                ))}
+              <Grid item xs={12}>
+                <Grid container spacing={4}>
+                  {items.map((item, index) => (
+                    <Grid item xs={12}>
+                      <Item
+                        key={index}
+                        text={item}
+                        format={format}
+                        index={index}
+                        addSelectedItem={addSelectedItem}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -163,7 +165,6 @@ export const App = () => {
             <Grid
               container
               spacing={4}
-              xs={12}
               justify={'flex-start'}
               alignItems={'center'}
             >
