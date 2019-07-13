@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import React, { useEffect, useState } from 'react'
@@ -84,103 +85,107 @@ export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
   }, [addSelectedItem, index, format, selected])
 
   return (
-    <Grid container spacing={4} style={{ background: '#add8e6' }}>
-      <Grid item md={12}>
-        <Typography variant={'h3'}>Citation {index + 1}</Typography>
+    <Paper style={{ background: '#add8e6', padding: 16 }}>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Typography variant={'h3'}>Citation {index + 1}</Typography>
 
-        <TextField
-          fullWidth
-          multiline
-          value={editedCitation}
-          onChange={event => setEditedCitation(event.target.value)}
-          style={{
-            background: 'white',
-            padding: 8,
-            marginTop: 8,
-            boxSizing: 'border-box',
-          }}
-        />
+          <TextField
+            fullWidth
+            multiline
+            value={editedCitation}
+            onChange={event => setEditedCitation(event.target.value)}
+            style={{
+              background: 'white',
+              padding: 8,
+              marginTop: 8,
+              boxSizing: 'border-box',
+            }}
+          />
 
-        {editedCitation !== citation && (
-          <Button
-            variant={'contained'}
-            color={'primary'}
-            onClick={() => setCitation(editedCitation)}
-          >
-            Search again
-          </Button>
-        )}
-      </Grid>
+          {editedCitation !== citation && (
+            <Button
+              variant={'contained'}
+              color={'primary'}
+              onClick={() => setCitation(editedCitation)}
+            >
+              Search again
+            </Button>
+          )}
+        </Grid>
 
-      <Grid item md={12}>
-        {searching && <Typography variant={'body1'}>Searching…</Typography>}
+        <Grid item xs={12}>
+          {searching && <Typography variant={'body1'}>Searching…</Typography>}
 
-        {error && <Typography variant={'body1'}>{error}</Typography>}
+          {error && <Typography variant={'body1'}>{error}</Typography>}
 
-        {matches && (
-          <Grid container item spacing={2}>
-            <Grid item xs={12} md={6}>
-              <Typography variant={'h3'}>Matches</Typography>
+          {matches && (
+            <Grid container item spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Typography variant={'h3'}>Matches</Typography>
 
-              {!selected && (
-                <div style={{ marginTop: 8, marginBottom: 8 }}>
-                  <Typography variant={'body1'}>
-                    No matches selected!
-                  </Typography>
+                <List dense>
+                  {matches.map(match => {
+                    const isSelected = selected && selected === match.DOI
 
-                  <Typography variant={'body1'}>
-                    Either select the correct match, edit the text above and
-                    search again, or leave unselected if none are correct.
-                  </Typography>
-                </div>
-              )}
+                    return (
+                      <ListItem
+                        alignItems={'flex-start'}
+                        button
+                        key={match.DOI}
+                        style={{
+                          background: isSelected ? 'yellow' : 'white',
+                          borderWidth: 1,
+                          borderLeftWidth: 5,
+                          borderStyle: 'solid',
+                          borderColor: isSelected ? 'black' : 'transparent',
+                          marginBottom: 8,
+                        }}
+                        onClick={() =>
+                          setSelected(isSelected ? null : match.DOI)
+                        }
+                      >
+                        <ListItemText
+                          primary={match.title ? match.title[0] : ''}
+                          secondary={<Metadata item={match} />}
+                        />
+                      </ListItem>
+                    )
+                  })}
+                </List>
+              </Grid>
 
-              <List dense>
-                {matches.map(match => {
-                  const isSelected = selected && selected === match.DOI
+              <Grid item xs={12} md={6}>
+                <Typography variant={'h3'}>Citation data</Typography>
 
-                  return (
-                    <ListItem
-                      alignItems={'flex-start'}
-                      button
-                      key={match.DOI}
-                      style={{
-                        background: isSelected ? 'yellow' : 'white',
-                        borderWidth: 1,
-                        borderLeftWidth: 5,
-                        borderStyle: 'solid',
-                        borderColor: isSelected ? 'black' : 'transparent',
-                        marginBottom: 8,
-                      }}
-                      onClick={() => setSelected(isSelected ? null : match.DOI)}
-                    >
-                      <ListItemText
-                        primary={match.title ? match.title[0] : ''}
-                        secondary={<Metadata item={match} />}
-                      />
-                    </ListItem>
-                  )
-                })}
-              </List>
+                {selected ? (
+                  <pre
+                    style={{
+                      background: 'white',
+                      padding: 8,
+                      whiteSpace: 'pre-wrap',
+                    }}
+                  >
+                    <code>{selectedItem}</code>
+                  </pre>
+                ) : (
+                  <div style={{ marginTop: 8, marginBottom: 8 }}>
+                    <Typography variant={'body1'}>
+                      No matches selected!
+                    </Typography>
+
+                    <Typography variant={'body1'}>
+                      Either select the correct match, edit the text above and
+                      search again, or leave unselected if none are correct.
+                    </Typography>
+                  </div>
+                )}
+              </Grid>
             </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Typography variant={'h3'}>Citation data</Typography>
-
-              <pre
-                style={{
-                  background: 'white',
-                  padding: 8,
-                  whiteSpace: 'pre-wrap',
-                }}
-              >
-                <code>{selectedItem}</code>
-              </pre>
-            </Grid>
-          </Grid>
-        )}
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </Paper>
   )
 })
 

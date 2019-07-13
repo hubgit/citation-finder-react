@@ -62,7 +62,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Grid container spacing={4} xs={12} style={{ padding: 16 }}>
-        <Grid item md={12}>
+        <Grid item xs={12}>
           <Typography variant={'h2'}>1. Enter citations</Typography>
 
           <TextField
@@ -77,7 +77,7 @@ export const App = () => {
         </Grid>
 
         {text && (
-          <Grid item md={12}>
+          <Grid item xs={12}>
             <Typography variant={'h2'}>2. Choose a citation format</Typography>
 
             <RadioGroup
@@ -102,7 +102,7 @@ export const App = () => {
         )}
 
         {text && format && (
-          <Grid item md={12}>
+          <Grid item xs={12}>
             <Typography variant={'h2'}>3. Search for matches</Typography>
 
             <Button
@@ -116,9 +116,9 @@ export const App = () => {
         )}
 
         {items && (
-          <Grid item md={12}>
+          <Grid item xs={12}>
             <Grid container spacing={8} xs={12}>
-              <Grid item>
+              <Grid item xs={12}>
                 <Typography variant={'h2'}>
                   4. Review the matched citations
                 </Typography>
@@ -139,9 +139,9 @@ export const App = () => {
                 </Typography>
               </Grid>
 
-              <Grid item container spacing={8} xs={12}>
+              <Grid item xs={12} container spacing={4}>
                 {items.map((item, index) => (
-                  <Grid item md={12}>
+                  <Grid item xs={12}>
                     <Item
                       key={index}
                       text={item}
@@ -157,7 +157,7 @@ export const App = () => {
         )}
 
         {selectedItems && (
-          <Grid item md={12}>
+          <Grid item xs={12}>
             <Typography variant={'h2'}>5. Download</Typography>
 
             <Grid
