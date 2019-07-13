@@ -90,7 +90,7 @@ export const App = () => {
               <FormControlLabel
                 value={FORMAT_RIS}
                 control={<Radio color={'primary'} />}
-                label={'RIS (Endnote, etc)'}
+                label={'RIS (EndNote, etc)'}
               />
               <FormControlLabel
                 value={FORMAT_BIBTEX}
