@@ -5,14 +5,14 @@
   "license": "MIT",
   "repository": "github:hubgit/citation-finder-react",
   "dependencies": {
-    "@material-ui/core": "^4.2.0",
-    "@material-ui/styles": "^4.2.0",
+    "@material-ui/core": "^4.8.2",
+    "@material-ui/styles": "^4.8.2",
     "axios": "^0.19.0",
     "file-saver": "^2.0.2",
-    "p-queue": "^6.1.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.1"
+    "p-queue": "^6.2.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "^3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
