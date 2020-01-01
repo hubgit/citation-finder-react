@@ -38,7 +38,7 @@ export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
       .get({
         url: '/works',
         params: {
-          query: citation,
+          'query.bibliographic': citation,
           rows: 3,
         },
       })
