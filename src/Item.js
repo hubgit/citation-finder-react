@@ -7,7 +7,10 @@ import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import React, { useEffect, useState } from 'react'
+import * as converter from './converter'
 import * as crossref from './crossref'
+import * as exporter from './exporter'
+import { extensions, FORMAT_RIS } from './formats'
 
 export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
   const [citation, setCitation] = useState(text)
@@ -68,19 +71,75 @@ export const Item = React.memo(({ format, text, index, addSelectedItem }) => {
     addSelectedItem(index, selected === null ? '' : undefined)
 
     if (selected) {
-      crossref
-        .get({
-          url: `/works/${encodeURIComponent(
-            selected
-          )}/transform/${encodeURIComponent(format)}`,
-          transformResponse: [data => data],
-        })
-        .then(response => {
-          if (response && response.status === 200) {
+      const fetchDataFromCrossref = () => {
+        crossref
+          .get({
+            url: `/works/${encodeURIComponent(
+              selected
+            )}/transform/${encodeURIComponent(format)}`,
+            transformResponse: [data => data],
+          })
+          .then(response => {
+            if (response && response.status === 200) {
+              setSelectedItem(response.data)
+              addSelectedItem(index, response.data)
+            }
+          })
+      }
+
+      const fetchDataFromPubMed = () => {
+        converter
+          .get({
+            params: {
+              ids: selected,
+            },
+          })
+          .then(response => {
+            if (!response || response.status !== 200) {
+              throw new Error()
+            }
+
+            const { status, records } = response.data
+
+            if (status !== 'ok' || !records || !records.length) {
+              throw new Error()
+            }
+
+            const [record] = records
+
+            if (!record.pmid) {
+              throw new Error()
+            }
+
+            return record.pmid
+          })
+          .then(pmid =>
+            exporter.get({
+              url: 'pubmed/',
+              params: {
+                id: pmid,
+                format: extensions[format],
+              },
+            })
+          )
+          .then(response => {
+            if (!response || response.status !== 200) {
+              throw new Error()
+            }
+
             setSelectedItem(response.data)
             addSelectedItem(index, response.data)
-          }
-        })
+          })
+          .catch(() => {
+            fetchDataFromCrossref()
+          })
+      }
+
+      if (format === FORMAT_RIS) {
+        fetchDataFromPubMed()
+      } else {
+        fetchDataFromCrossref()
+      }
     }
   }, [addSelectedItem, index, format, selected])
 

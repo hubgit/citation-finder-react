@@ -10,16 +10,9 @@ import { ThemeProvider } from '@material-ui/styles'
 import React, { useCallback, useEffect, useState } from 'react'
 import FileSaver from 'file-saver'
 import * as crossref from './crossref'
+import { extensions, FORMAT_BIBTEX, FORMAT_RIS } from './formats'
 import { Item } from './Item'
 import { theme } from './theme'
-
-const FORMAT_RIS = 'application/x-research-info-systems'
-const FORMAT_BIBTEX = 'application/x-bibtex'
-
-const extensions = {
-  [FORMAT_RIS]: 'ris',
-  [FORMAT_BIBTEX]: 'bib',
-}
 
 export const App = () => {
   const [text, setText] = useState()

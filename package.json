@@ -21,6 +21,9 @@
     "now-dev": "react-scripts start",
     "now-build": "react-scripts build"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
