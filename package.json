@@ -5,9 +5,11 @@
   "license": "MIT",
   "repository": "github:hubgit/citation-finder-react",
   "dependencies": {
+    "@codemirror/view": "^6.20.1",
     "@material-ui/core": "4.8.2",
     "@material-ui/styles": "4.8.2",
     "axios": "^1.5.0",
+    "codemirror": "^6.0.1",
     "file-saver": "^2.0.2",
     "p-queue": "^7.4.1",
     "react": "^16.14.0",

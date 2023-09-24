@@ -4,7 +4,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { ThemeProvider } from '@material-ui/styles'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -13,6 +12,8 @@ import * as crossref from './crossref'
 import { extensions, FORMAT_BIBTEX, FORMAT_RIS } from './formats'
 import { Item } from './Item'
 import { theme } from './theme'
+import { Editor } from './Editor'
+import { InputLabel } from '@material-ui/core'
 
 export const App = () => {
   const [text, setText] = useState()
@@ -58,15 +59,8 @@ export const App = () => {
         <Grid item xs={12}>
           <Typography variant={'h2'}>1. Enter citations</Typography>
 
-          <TextField
-            autoFocus
-            fullWidth
-            label={'Enter a list of citations, with each one on a new line'}
-            multiline
-            margin={'normal'}
-            value={text}
-            onChange={event => setText(event.target.value)}
-          />
+          <InputLabel shrink focused>Enter a list of citations, with each one on a new line</InputLabel>
+          <Editor setText={setText}/>
         </Grid>
 
         {text && (

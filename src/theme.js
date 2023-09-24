@@ -2,7 +2,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
 export const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;',
+    fontFamily: 'system-ui,Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;',
     h2: {
       fontSize: '150%',
       fontWeight: 'bold',
