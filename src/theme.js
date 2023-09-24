@@ -1,6 +1,6 @@
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
+import { createTheme, adaptV4Theme } from '@mui/material/styles'
 
-export const theme = createMuiTheme({
+export const theme = createTheme(adaptV4Theme({
   typography: {
     fontFamily: 'system-ui,Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;',
     h2: {
@@ -20,4 +20,4 @@ export const theme = createMuiTheme({
       },
     },
   },
-})
+}))
